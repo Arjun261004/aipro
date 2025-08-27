@@ -22,8 +22,8 @@ jobs:
       - name: Deploy to EB
         uses: einaregilsson/beanstalk-deploy@v21
         with:
-          aws_access_key: AKIAYO5OV5ILVNNCOJVV
-          aws_secret_key: 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
+          aws_access_key: ${{ secrets.aws_access_key }}
+          aws_secret_key: ${{ secrets.aws_secret_key }}
           application_name: 'aipro'
           environment_name: 'aipro-env'
           version_label: ${{ github.sha }}
