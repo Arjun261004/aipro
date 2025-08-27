@@ -1,0 +1,31 @@
+name: CICD
+
+on:
+  push:
+    branches:
+      - elastic-beanstalk-ec2
+
+jobs:
+  build-and-deploy:
+    runs-on: [ ubuntu-latest ]
+    steps:
+      - name: Checkout Source
+        uses: actions/checkout@v4
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Install Dependencies
+        run: npm install
+      - name: Genrate Deployment Package
+        run: zip -r aipro-build.zip .
+      - name: Deploy to EB
+        uses: einaregilsson/beanstalk-deploy@v21
+        with:
+          aws_access_key: AKIAYO5OV5ILVNNCOJVV
+          aws_secret_key: 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
+          application_name: 'aipro'
+          environment_name: 'aipro-env'
+          version_label: ${{ github.sha }}
+          region: us-east-1
+          deployment_package: aipro-build.zip
