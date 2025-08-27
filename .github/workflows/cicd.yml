@@ -27,5 +27,5 @@ jobs:
           application_name: 'aipro'
           environment_name: 'aipro-env'
           version_label: ${{ github.sha }}
-          region: us-east-1
+          region: eu-north-1
           deployment_package: aipro-build.zip
